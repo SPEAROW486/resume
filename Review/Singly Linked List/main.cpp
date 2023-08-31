@@ -22,7 +22,7 @@ template <typename T>
 class SinglyLinkedList
 {
 public:
-    SinglyLinkedList() : Head(nullptr), Size(0) {}
+    SinglyLinkedList() : Head(nullptr) {}
 
     virtual ~SinglyLinkedList();
 
@@ -39,7 +39,6 @@ public:
 
 private:
     std::unique_ptr<Node<T>> Head;
-    size_t Size;
 };
 
 template <typename T>
@@ -49,7 +48,6 @@ SinglyLinkedList<T>::~SinglyLinkedList()
     {
         Head = std::move(Head->Next);
     }
-    Size = 0;
 }
 
 template <typename T>
