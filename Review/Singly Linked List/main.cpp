@@ -15,7 +15,7 @@ public:
 
 public:
     std::unique_ptr<T> Data;
-    std::unique_ptr<Node> Next;
+    std::unique_ptr<Node<T>> Next;
 };
 
 template <typename T>
