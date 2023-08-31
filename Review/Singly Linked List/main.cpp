@@ -30,12 +30,12 @@ public:
     void Push_Back(T Data);
     void Pop_Front();
     void Pop_Back();
-    void Insert(int Index);
+    void Insert(T Data, int Index);
     void Erase(int Index);
     void Print();
 
-    std::unique_ptr<Node<T>> &Front();
-    std::unique_ptr<Node<T>> &Back();
+    T &Front();
+    T &Back();
 
 private:
     std::unique_ptr<Node<T>> Head;
@@ -90,33 +90,105 @@ void SinglyLinkedList<T>::Push_Back(T Data)
 template <typename T>
 void SinglyLinkedList<T>::Pop_Front()
 {
+    assert(Head);
+    Head = std::move(Head->Next);
 }
 
 template <typename T>
 void SinglyLinkedList<T>::Pop_Back()
 {
+    assert(Head);
+
+    Node<T> *Current = Head.get();
+    Node<T> *Prev = Current;
+    while (Current->Next != nullptr)
+    {
+        Prev = Current;
+        Current = Current->Next.get();
+    }
+
+    if (Current == Prev)
+    {
+        Head = nullptr;
+    }
+    else
+    {
+        Prev->Next = nullptr;
+    }
 }
 
 template <typename T>
-void SinglyLinkedList<T>::Insert(int Index)
+void SinglyLinkedList<T>::Insert(T Data, int Index)
 {
+    std::unique_ptr<Node<T>> NodePtr = std::make_unique<Node<T>>(Data);
+
+    if (Head == nullptr)
+    {
+        Head = std::move(NodePtr);
+    }
+    else
+    {
+        Node<T> *Current = Head.get();
+        Node<T> *Prev = Current;
+        for (int i = 0; i < Index; ++i)
+        {
+            Prev = Current;
+            Current = Current->Next.get();
+        }
+
+        NodePtr->Next = std::move(Prev->Next);
+        Prev->Next = std::move(NodePtr);
+    }
 }
 
 template <typename T>
 void SinglyLinkedList<T>::Erase(int Index)
 {
+    if (Index == 0)
+    {
+        Head = std::move(Head->Next);
+    }
+    else
+    {
+        Node<T> *Current = Head.get();
+        Node<T> *Prev = Current;
+        for (int i = 0; i < Index; i++)
+        {
+            Prev = Current;
+            Current = Current->Next.get();
+        }
+
+        Prev->Next = std::move(Current->Next);
+        Current = nullptr;
+    }
 }
 
 template <typename T>
-std::unique_ptr<Node<T>> &SinglyLinkedList<T>::Front()
+T &SinglyLinkedList<T>::Front()
 {
-    return Head;
+    return *Head->Data;
 }
 
 template <typename T>
-std::unique_ptr<Node<T>> &SinglyLinkedList<T>::Back()
+T &SinglyLinkedList<T>::Back()
 {
-    return Head;
+    Node<T> *Current = Head.get();
+    Node<T> *Prev = Current;
+
+    while (Current->Next != nullptr)
+    {
+        Prev = Current;
+        Current = Current->Next.get();
+    }
+
+    if (Current == Prev)
+    {
+        return *Head->Data;
+    }
+    else
+    {
+        return *Prev->Next->Data;
+    }
 }
 
 template <typename T>
@@ -133,15 +205,10 @@ void SinglyLinkedList<T>::Print()
 int main()
 {
     SinglyLinkedList<int> List;
-    List.Push_Back(30);
-    List.Push_Back(40);
-    List.Push_Back(50);
-    List.Print();
 
-    std::cout << "---------------------" << std::endl;
-
-    List.Push_Front(20);
-    List.Push_Front(10);
+    List.Insert(30, 0);
+    List.Insert(40, 1);
+    List.Erase(1);
     List.Print();
 
     return 0;
