@@ -38,7 +38,10 @@ private:
 template <typename T>
 Stack<T>::~Stack()
 {
-    Top = std::move(Top->Next);
+    while (Top)
+    {
+        Top = std::move(Top->Next);
+    }
 }
 
 template <typename T>
