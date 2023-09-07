@@ -76,6 +76,7 @@ public:
 
     void Push(int Key);
     int Pop();
+    void Print() const;
 
 private:
     enum
@@ -115,7 +116,7 @@ int HeapMax::Pop()
 
     if (child + 1 <= heap_count)
     {
-        // 자식 노드 중에 더 작은 값이랑 바꿔야하기 때문에 적절한 위치를 찾는다.
+        // 자식 노드 중에 더 큰 값이랑 바꿔야하기 때문에 적절한 위치를 찾는다.
         child = v[child] > v[child + 1] ? child : child + 1;
     }
 
@@ -132,24 +133,27 @@ int HeapMax::Pop()
     return ret;
 }
 
+void HeapMax::Print() const
+{
+    for (int i = 1; i < heap_count + 1; ++i)
+    {
+        std::cout << v[i] << " ";
+    }
+}
+
 int main()
 {
     HeapMax h;
     std::vector<int> v;
 
-    v.push_back(7);
-    v.push_back(5);
-    v.push_back(3);
-    v.push_back(12);
-    v.push_back(9);
-    v.push_back(97);
+    h.Push(7);
+    h.Push(5);
+    h.Push(3);
+    h.Push(12);
+    h.Push(9);
+    h.Push(97);
 
-    for (auto it = v.begin(); it != v.end(); ++it)
-    {
-        h.Push(*it);
-    }
-
-    h.Pop();
+    h.Print();
 
     return 0;
 }
