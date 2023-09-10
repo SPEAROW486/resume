@@ -198,7 +198,33 @@ std::shared_ptr<Node<T>> BinarySearchTree<T>::Delete_Internel(std::shared_ptr<No
         // 왼쪽 서브 트리면 가장 큰 값
         // 오른쪽 서브 트리면 가장 작은 값을 찾아야하는데..
         // 중위 계승자..?
-        return nullptr;
+        std::shared_ptr<Node<T>> succ = NodePtr;
+        std::shared_ptr<Node<T>> succ_parent = nullptr;
+
+        while (succ->Left != nullptr)
+        {
+            succ_parent = succ;
+            succ = succ->Left;
+        }
+
+        std::shared_ptr<Node<T>> ret = nullptr;
+        if (succ->GetKey() <= NodePtr->Left->GetKey() && NodePtr->Right->GetKey() > succ->GetKey())
+        {
+            ret = succ;
+        }
+        else
+        {
+            ret = succ_parent->Right;
+        }
+
+        ret->Left = NodePtr->Left;
+        ret->Right = NodePtr->Right;
+
+        NodePtr->Left = nullptr;
+        NodePtr->Right = nullptr;
+        NodePtr = nullptr;
+
+        return ret;
     }
 }
 
@@ -283,17 +309,16 @@ int main()
 {
     BinarySearchTree<int> bst;
 
-    bst.Insert(5);
+    bst.Insert(15);
+    bst.Insert(7);
     bst.Insert(3);
-    bst.Insert(1);
-    bst.Insert(2);
-    bst.Insert(6);
     bst.Insert(8);
+    bst.Insert(1);
     bst.Insert(4);
 
     bst.Print();
 
-    bst.Delete(1);
+    bst.Delete(7);
 
     bst.Print();
 
