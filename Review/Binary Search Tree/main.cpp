@@ -194,12 +194,8 @@ std::shared_ptr<Node<T>> BinarySearchTree<T>::Delete_Internel(std::shared_ptr<No
     }
     else
     {
-        // both
-        // 왼쪽 서브 트리면 가장 큰 값
-        // 오른쪽 서브 트리면 가장 작은 값을 찾아야하는데..
-        // 중위 계승자..?
-        std::shared_ptr<Node<T>> succ = NodePtr;
-        std::shared_ptr<Node<T>> succ_parent = nullptr;
+        std::shared_ptr<Node<T>> succ_parent = NodePtr;
+        std::shared_ptr<Node<T>> succ = succ_parent->Right;
 
         while (succ->Left != nullptr)
         {
@@ -207,24 +203,18 @@ std::shared_ptr<Node<T>> BinarySearchTree<T>::Delete_Internel(std::shared_ptr<No
             succ = succ->Left;
         }
 
-        std::shared_ptr<Node<T>> ret = nullptr;
-        if (succ->GetKey() <= NodePtr->Left->GetKey() && NodePtr->Right->GetKey() > succ->GetKey())
+        if (succ_parent != NodePtr)
         {
-            ret = succ;
+            succ_parent->Left = succ->Right;
         }
         else
         {
-            ret = succ_parent->Right;
+            succ_parent->Right = succ->Right;
         }
 
-        ret->Left = NodePtr->Left;
-        ret->Right = NodePtr->Right;
-
-        NodePtr->Left = nullptr;
-        NodePtr->Right = nullptr;
-        NodePtr = nullptr;
-
-        return ret;
+        NodePtr->SetKey(succ->GetKey());
+        succ = nullptr;
+        return NodePtr;
     }
 }
 
@@ -309,16 +299,17 @@ int main()
 {
     BinarySearchTree<int> bst;
 
-    bst.Insert(15);
-    bst.Insert(7);
-    bst.Insert(3);
-    bst.Insert(8);
-    bst.Insert(1);
-    bst.Insert(4);
+    bst.Insert(50);
+    bst.Insert(30);
+    bst.Insert(20);
+    bst.Insert(40);
+    bst.Insert(70);
+    bst.Insert(60);
+    bst.Insert(80);
 
     bst.Print();
 
-    bst.Delete(7);
+    bst.Delete(70);
 
     bst.Print();
 
