@@ -169,14 +169,11 @@ std::shared_ptr<Node<T>> BinarySearchTree<T>::Delete_Internel(std::shared_ptr<No
     if (NodePtr->GetKey() > Key)
     {
         NodePtr->Left = Delete_Internel(NodePtr->Left, Key);
+        return NodePtr;
     }
-    else
+    else if (NodePtr->GetKey() < Key)
     {
         NodePtr->Right = Delete_Internel(NodePtr->Right, Key);
-    }
-
-    if (NodePtr->GetKey() != Key)
-    {
         return NodePtr;
     }
 
@@ -194,6 +191,12 @@ std::shared_ptr<Node<T>> BinarySearchTree<T>::Delete_Internel(std::shared_ptr<No
     }
     else
     {
+        // 지우려고 하는 노드의 우측 서브 트리를 뒤진다.
+        // 계승자의 레프트가 비어있을떄 까지 뒤진다.
+        // 다 뒤지고 나면
+        // 지우려고 하는 노드랑 계승자의 부모가 같은지 아닌지에 따라
+        // 포인터를 바꿔주는 부분이 다름.
+        // 그 후 지울 노드에 계승자의 값을 카피하고 계승자를 삭제
         std::shared_ptr<Node<T>> succ_parent = NodePtr;
         std::shared_ptr<Node<T>> succ = succ_parent->Right;
 
@@ -214,6 +217,7 @@ std::shared_ptr<Node<T>> BinarySearchTree<T>::Delete_Internel(std::shared_ptr<No
 
         NodePtr->SetKey(succ->GetKey());
         succ = nullptr;
+
         return NodePtr;
     }
 }
