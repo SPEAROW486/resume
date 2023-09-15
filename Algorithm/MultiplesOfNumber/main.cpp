@@ -1,21 +1,15 @@
 
 
 #include <iostream>
-#include <time.h>
 
 int main()
 {
     constexpr int MAX = 1000;
-
-    srand(static_cast<unsigned int>(time(NULL)));
-    int num = rand() % 1000;
-
-    std::cout << "Number is " << num << std::endl;
+    constexpr int num = 4;
 
     int sum = 0;
     int count = 0;
 
-    num = 4;
     for (int i = 0; i <= MAX; ++i)
     {
         if (i % num == 0)
