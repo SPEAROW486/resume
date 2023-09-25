@@ -1,0 +1,10 @@
+---
+triple:          'arm64-apple-darwin'
+binary-path:     '/Users/bang-gyeong-un/Documents/GitHub/resume/Algorithm/BaaaaaaaaaaarkingDog_0x01/Three Dice/main'
+relocations:
+  - { offsetInCU: 0x26, offset: 0x26, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x0, symBinAddr: 0x100003D80, symSize: 0x154 }
+  - { offsetInCU: 0xB25, offset: 0xB25, size: 0x8, addend: 0x0, symName: __ZNSt3__13maxB7v160006IiEERKT_S3_S3_, symObjAddr: 0x154, symBinAddr: 0x100003ED4, symSize: 0x2C }
+  - { offsetInCU: 0xB68, offset: 0xB68, size: 0x8, addend: 0x0, symName: __ZNSt3__13maxB7v160006IiNS_6__lessIiiEEEERKT_S5_S5_T0_, symObjAddr: 0x180, symBinAddr: 0x100003F00, symSize: 0x54 }
+  - { offsetInCU: 0x2D4A, offset: 0x2D4A, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x0, symBinAddr: 0x100003D80, symSize: 0x154 }
+  - { offsetInCU: 0x2DA2, offset: 0x2DA2, size: 0x8, addend: 0x0, symName: __ZNKSt3__16__lessIiiEclB7v160006ERKiS3_, symObjAddr: 0x1D4, symBinAddr: 0x100003F54, symSize: 0x34 }
+...
