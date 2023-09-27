@@ -1,0 +1,14 @@
+---
+triple:          'arm64-apple-darwin'
+binary-path:     '/Users/bang-gyeong-un/Documents/GitHub/resume/Algorithm/BaaaaaaaaaaarkingDog_0x01/ODD Number/main'
+relocations:
+  - { offsetInCU: 0x26, offset: 0x26, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x0, symBinAddr: 0x100003BF4, symSize: 0x190 }
+  - { offsetInCU: 0x4A54, offset: 0x4A54, size: 0x8, addend: 0x0, symName: __ZNSt3__14endlB7v160006IcNS_11char_traitsIcEEEERNS_13basic_ostreamIT_T0_EES7_, symObjAddr: 0x1D0, symBinAddr: 0x100003DC4, symSize: 0x58 }
+  - { offsetInCU: 0x4A94, offset: 0x4A94, size: 0x8, addend: 0x0, symName: __ZNSt3__19use_facetB7v160006INS_5ctypeIcEEEERKT_RKNS_6localeE, symObjAddr: 0x2B4, symBinAddr: 0x100003EA8, symSize: 0x2C }
+  - { offsetInCU: 0x73BB, offset: 0x73BB, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x0, symBinAddr: 0x100003BF4, symSize: 0x190 }
+  - { offsetInCU: 0x7445, offset: 0x7445, size: 0x8, addend: 0x0, symName: __ZNSt3__114numeric_limitsIiE3maxB7v160006Ev, symObjAddr: 0x190, symBinAddr: 0x100003D84, symSize: 0x14 }
+  - { offsetInCU: 0x7505, offset: 0x7505, size: 0x8, addend: 0x0, symName: __ZNSt3__113basic_ostreamIcNS_11char_traitsIcEEElsB7v160006EPFRS3_S4_E, symObjAddr: 0x1A4, symBinAddr: 0x100003D98, symSize: 0x2C }
+  - { offsetInCU: 0x7537, offset: 0x7537, size: 0x8, addend: 0x0, symName: __ZNSt3__123__libcpp_numeric_limitsIiLb1EE3maxB7v160006Ev, symObjAddr: 0x228, symBinAddr: 0x100003E1C, symSize: 0x8 }
+  - { offsetInCU: 0x754A, offset: 0x754A, size: 0x8, addend: 0x0, symName: __ZNKSt3__19basic_iosIcNS_11char_traitsIcEEE5widenB7v160006Ec, symObjAddr: 0x230, symBinAddr: 0x100003E24, symSize: 0x84 }
+  - { offsetInCU: 0x75B6, offset: 0x75B6, size: 0x8, addend: 0x0, symName: __ZNKSt3__15ctypeIcE5widenB7v160006Ec, symObjAddr: 0x2E0, symBinAddr: 0x100003ED4, symSize: 0x38 }
+...

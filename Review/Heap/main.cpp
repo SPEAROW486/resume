@@ -26,7 +26,6 @@ void HeapMin::Push(int Key)
 {
     v[++heap_count] = Key;
 
-    // make min heap
     int child = heap_count;
     int parent = child / 2;
 
@@ -91,7 +90,6 @@ void HeapMax::Push(int Key)
 {
     v[++heap_count] = Key;
 
-    // make min heap
     int child = heap_count;
     int parent = child / 2;
 
