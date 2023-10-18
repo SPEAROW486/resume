@@ -1,14 +1,12 @@
 #include <iostream>
 #include <list>
 
-#include <sstream>
-
 int main()
 {
-    int n = 7;
-    int k = 3;
+    int n = 0;
+    int k = 0;
 
-    // std::cin >> n;
+    std::cin >> n >> k;
 
     std::list<int> list;
     for (int i = 1; i <= n; ++i)
@@ -35,29 +33,15 @@ int main()
         }
     }
 
-    //
-    // if (!ints.empty())
-    // {
-    //     iterator it = ints.begin();
-    //     const iterator end = ints.end();
-
-    //     cout << *it;
-    //     for (++it; it != end; ++it)
-    //     {
-    //         cout << ", " << *it;
-    //     }
-    //     cout << std::endl;
-    // }
-
-    // 1 2 3 4 5 6 7
-
-    // 1 2 4 5 6 7
-    // 1 2 4 5 7
-    // 1 4 5 7
-    // 1 4 5
-    for (const int elem : josephus)
+    if (!josephus.empty())
     {
-        std::cout << elem << " ";
+        auto it = josephus.begin();
+        std::cout << "<" << *it;
+        for (++it; it != josephus.end(); ++it)
+        {
+            std::cout << ", " << *it;
+        }
+        std::cout << ">" << std::endl;
     }
 
     return 0;
