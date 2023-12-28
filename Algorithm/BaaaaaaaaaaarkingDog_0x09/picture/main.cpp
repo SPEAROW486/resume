@@ -25,24 +25,6 @@ static Point SearchDirection[4] = {
     Point(0, -1),
     Point(0, 1)};
 
-bool IsWithInRange(const Point &p, const int row_max, const int col_max)
-{
-
-    for (const Point &elem : SearchDirection)
-    {
-        Point UnitTest = p + elem;
-        if (UnitTest.row < 0 || UnitTest.row >= row_max)
-        {
-            return false;
-        }
-        if (UnitTest.col < 0 || UnitTest.col >= col_max)
-        {
-            return false;
-        }
-    }
-    return true;
-}
-
 int main()
 {
     std::ios_base::sync_with_stdio(false);
