@@ -40,58 +40,78 @@ int main()
     std::cin >> r >> c;
 
     char maze[4][4] = {0};
-    int buf[4][4] = {0};
+    int buf_j[4][4] = {0};
+    int buf_f[4][4] = {0};
 
-    Point j_init;
-    Point f_init;
+    std::queue<Point> queue_f;
+    std::queue<Point> queue_j;
     for (int i = 0; i < r; ++i)
     {
         for (int j = 0; j < c; ++j)
         {
+            bool is_fire = false;
             std::cin >> maze[i][j];
 
             if (maze[i][j] == 'J')
             {
-                j_init.row = i;
-                j_init.col = j;
+                queue_j.push(Point(i, j));
             }
 
             if (maze[i][j] == 'F')
             {
-                f_init.row = i;
-                f_init.col = j;
+                queue_f.push(Point(i, j));
+                is_fire = true;
+                buf_f[i][j] = 0;
+            }
+
+            if (!is_fire)
+            {
+                buf_f[i][j] = INT_MAX;
             }
         }
     }
 
-    // 일단 생각나는거
-    // 지훈이용 큐, 불 용 큐를 둔다.
-    // 버퍼도 2개를 둔다.
-    //
+    // 1. bfs buf_f
+    // 2. bfs buf_j
 
-    std::queue<Point> q;
-
-    q.push(j_init);
-    q.push(f_init);
-
-    while (!q.empty())
+    while (!queue_j.empty())
     {
-        Point p = q.front();
+        Point point_f = queue_f.front();
+        Point point_j = queue_j.front();
         for (const Point &direction : SearchDirection)
         {
-            Point UnitTest = p + direction;
-            if (IsContain(UnitTest, r, c))
+            Point UnitTest_f = point_f + direction;
+            if (IsContain(UnitTest_f, r, c))
             {
                 // 지나갈수 있는 공간
-                if (maze[UnitTest.row][UnitTest.col] == '.' && buf[UnitTest.row][UnitTest.col] == 0)
+                if (maze[UnitTest_f.row][UnitTest_f.col] == '.' && buf_f[UnitTest_f.row][UnitTest_f.col] == 0)
                 {
-                    q.push(UnitTest);
-                    buf[UnitTest.row][UnitTest.col] = buf[p.row][p.col] + 1;
+                    queue_f.push(UnitTest_f);
+                    buf_f[UnitTest_f.row][UnitTest_f.col] = buf_f[point_f.row][point_f.col] + 1;
+                }
+            }
+
+            Point UnitTest_j = point_j + direction;
+            if (IsContain(UnitTest_j, r, c))
+            {
+                if (maze[UnitTest_j.row][UnitTest_j.col] == '.' && buf_j[UnitTest_j.row][UnitTest_j.col] == 0 && buf_f[UnitTest_j.row][UnitTest_j.col] == 0)
+                {
+                    queue_j.push(UnitTest_j);
+                    buf_j[UnitTest_j.row][UnitTest_j.col] = buf_j[point_j.row][point_j.col] + 1;
+
+                    if (UnitTest_j.row == 0 || UnitTest_j.row == r - 1 || UnitTest_j.col == 0 || UnitTest_j.col == c - 1)
+                    {
+                        std::cout << buf_j[UnitTest_j.row][UnitTest_j.col];
+                        return 0;
+                    }
                 }
             }
         }
-        q.pop();
+        queue_f.pop();
+        queue_j.pop();
     }
+
+    std::cout << "IMPOSSIBLE";
 
     return 0;
 }
