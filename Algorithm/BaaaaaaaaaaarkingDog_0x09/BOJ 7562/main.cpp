@@ -2,9 +2,7 @@
 #include <bits/stdc++.h>
 
 constexpr int MAX = 301;
-int board[MAX][MAX];
 int dist[MAX][MAX];
-int minimum_movement_count = 0;
 
 // 대략 8시 방향부터 시계 방향으로 탐색
 int dx[8] = {-1, 1, 2, 2, 1, -1, -2, -2};
@@ -46,7 +44,6 @@ int main()
         // 그게아니면 현재 위치를 큐에 푸쉬
         std::queue<std::pair<int, int>> q;
         q.push({sx, sy});
-        // dist[sx][sy] = 0; 전역배열이라 기본 0으로 초기화 되있으니 굳이 필요없을듯?
 
         while (!q.empty())
         {
@@ -67,21 +64,12 @@ int main()
                 }
 
                 dist[nx][ny] = dist[cur.X][cur.Y] + 1;
-                minimum_movement_count = std::max(minimum_movement_count, dist[nx][ny]);
                 q.push({nx, ny});
-
-                if (nx == tx && ny == ty)
-                {
-                    q = std::queue<std::pair<int, int>>();
-                    break;
-                }
             }
         }
 
-        std::cout << minimum_movement_count << "\n";
-        std::fill(board[0], board[MAX - 1], 0);
+        std::cout << dist[tx][ty] << "\n";
         std::fill(dist[0], dist[MAX - 1], 0);
-        minimum_movement_count = 0;
     }
     return 0;
 }
