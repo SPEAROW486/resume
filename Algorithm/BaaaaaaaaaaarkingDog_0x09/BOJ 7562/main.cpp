@@ -79,8 +79,8 @@ int main()
         }
 
         std::cout << minimum_movement_count << "\n";
-        std::fill(board[0], board[MAX], 0);
-        std::fill(dist[0], dist[MAX], 0);
+        std::fill(board[0], board[MAX - 1], 0);
+        std::fill(dist[0], dist[MAX - 1], 0);
         minimum_movement_count = 0;
     }
     return 0;
