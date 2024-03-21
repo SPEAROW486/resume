@@ -26,6 +26,7 @@ int main()
 
         std::cin >> left_bottom_x >> left_bottom_y >> right_top_x >> right_top_y;
 
+        // 나는 문제에 있는 그림이랑 완전히 일치시키기 위해서 반전 시켰는데, 정답 코드보니까 굳이 반전안시켜도 되는듯?
         for (int row = m - right_top_y; row < m - left_bottom_y; ++row)
         {
             for (int col = left_bottom_x; col < right_top_x; ++col)
