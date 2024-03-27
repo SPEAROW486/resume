@@ -5,7 +5,7 @@ constexpr int MAX = 301;
 
 int board[MAX][MAX];
 int height[MAX][MAX];
-bool vis[MAX][MAX];
+int vis[MAX][MAX];
 
 int dx[4] = {-1, 1, 0, 0};
 int dy[4] = {0, 0, -1, 1};
@@ -38,11 +38,11 @@ int main()
     while (true)
     {
         ++years;
-        std::copy(&board[0][0], &board[MAX - 1][MAX], &height[0][0]);
         while (!q.empty())
         {
             auto cur = q.front();
             q.pop();
+            int erase_count = 0;
             for (int dir = 0; dir < 4; ++dir)
             {
                 int nx = cur.X + dx[dir];
@@ -58,13 +58,9 @@ int main()
                     continue;
                 }
 
-                if (height[cur.X][cur.Y] == 0)
-                {
-                    continue;
-                }
-
-                --height[cur.X][cur.Y];
+                ++erase_count;
             }
+            height[cur.X][cur.Y] = std::max(0, board[cur.X][cur.Y] - erase_count);
         }
 
         int count = 0;
@@ -78,12 +74,12 @@ int main()
                     continue;
                 }
 
-                if (vis[i][j])
+                if (vis[i][j] == years)
                 {
                     continue;
                 }
 
-                vis[i][j] = true;
+                vis[i][j] = years;
                 q2.push({i, j});
                 q.push({i, j});
                 while (!q2.empty())
@@ -106,14 +102,14 @@ int main()
                             continue;
                         }
 
-                        if (vis[nx][ny])
+                        if (vis[nx][ny] == years)
                         {
                             continue;
                         }
 
-                        vis[nx][ny] = true;
-                        q2.push({nx, ny});
+                        vis[nx][ny] = years;
 
+                        q2.push({nx, ny});
                         // 빙산 녹이기용 큐에 다시 빙산의 위치를 푸쉬
                         q.push({nx, ny});
                     }
@@ -134,7 +130,6 @@ int main()
         }
 
         std::copy(&height[0][0], &height[MAX - 1][MAX], &board[0][0]);
-        std::fill(&vis[0][0], &vis[MAX - 1][MAX], false);
     }
 
     return 0;
