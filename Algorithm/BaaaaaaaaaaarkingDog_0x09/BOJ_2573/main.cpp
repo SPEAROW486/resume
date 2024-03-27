@@ -85,6 +85,7 @@ int main()
 
                 vis[i][j] = true;
                 q2.push({i, j});
+                q.push({i, j});
                 while (!q2.empty())
                 {
                     auto cur = q2.front();
