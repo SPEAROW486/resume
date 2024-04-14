@@ -14,22 +14,17 @@ void Solve(int x, int y, int n)
 
     int third = n / 3;
 
-    int dx[8] = {x, x, x,
-                 x + third, x + third,
-                 x + third * 2, x + third * 2, x + third * 2};
-    int dy[8] = {
-        y,
-        y + third,
-        y + third * 2,
-        y,
-        y + third * 2,
-        y,
-        y + third,
-        y + third * 2,
-    };
-    for (int i = 0; i < 8; ++i)
+    for (int i = 0; i < 3; ++i)
     {
-        Solve(dx[i], dy[i], third);
+        for (int j = 0; j < 3; ++j)
+        {
+            if (i == 1 && j == 1)
+            {
+                continue;
+            }
+
+            Solve(x + third * i, y + third * j, third);
+        }
     }
 
     return;
