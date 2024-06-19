@@ -1,0 +1,9 @@
+---
+triple:          'arm64-apple-darwin'
+binary-path:     '/Users/bang-gyeong-un/Documents/GitHub/resume/Algorithm/BaaaaaaaaaaarkingDog_0x10/BOJ_11726/Build/main'
+relocations:
+  - { offsetInCU: 0x26, offset: 0x26, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x0, symBinAddr: 0x100003E88, symSize: 0x108 }
+  - { offsetInCU: 0x3F, offset: 0x3F, size: 0x8, addend: 0x0, symName: _n, symObjAddr: 0x5BDC, symBinAddr: 0x100008000, symSize: 0x0 }
+  - { offsetInCU: 0x5B, offset: 0x5B, size: 0x8, addend: 0x0, symName: _d, symObjAddr: 0x5BE0, symBinAddr: 0x100008004, symSize: 0x0 }
+  - { offsetInCU: 0x311D, offset: 0x311D, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x0, symBinAddr: 0x100003E88, symSize: 0x108 }
+...
