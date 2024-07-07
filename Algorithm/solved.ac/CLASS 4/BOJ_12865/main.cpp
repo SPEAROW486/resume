@@ -5,41 +5,52 @@
     std::ios_base::sync_with_stdio(false); \
     std::cin.tie(NULL)
 
-constexpr int MAX = 10; // 100001;
+constexpr int NMAX = 101;   // 101;
+constexpr int MAX = 100001; // 100001;
 int n, k;
-int dp[MAX];
-int items[MAX];
+int dp[NMAX][MAX];
+
+int weight[NMAX];
+int value[NMAX];
 
 int main()
 {
-    // FASTIO;
+    FASTIO;
     std::cin >> n >> k;
 
-    for (int i = 0; i < n; ++i)
+    for (int i = 1; i <= n; ++i)
     {
         int w, v;
         std::cin >> w >> v;
-        dp[w] = v;
-        items[w] = v;
+
+        weight[i] = w;
+        value[i] = v;
+
+        dp[i][w] = v;
     }
 
-    for (int i = 3; i <= k; ++i)
+    for (int i = 1; i <= n; ++i)
     {
-        for (int j = 1; j < i; ++j)
+        for (int j = 1; j <= k; ++j)
         {
-            if (i == 2 * j)
+            if (weight[i] > j)
             {
-                continue;
+                // 담을수 없으면 이전 물건까지 고려한 그대로
+                dp[i][j] = dp[i - 1][j];
             }
-            dp[i] = std::max(dp[i], dp[i - j] + dp[j]);
+            else
+            {
+                // i-1번째 물건까지 담아서 j무게를 채울때랑
+                // i번째 물건까지 담아서 j무게를 채울때니까
+                dp[i][j] = std::max(dp[i - 1][j], dp[i - 1][j - weight[i]] + value[i]);
+            }
         }
     }
 
-    // 3,4 3,5 3,6
-    std::cout << *std::max_element(dp, dp + MAX);
+    std::cout << dp[n][k];
 
-    int nn;
-    std::cin >> nn;
+    // int nn;
+    // std::cin >> nn;
 
     return 0;
 }
