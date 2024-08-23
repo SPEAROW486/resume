@@ -9,6 +9,11 @@ int n, k;
 
 void merge(std::vector<int> &vec, int left, int right)
 {
+    if ((right - left) > (n / k))
+    {
+        return;
+    }
+
     int mid = (left + right) / 2;
     int lidx = left;
     int ridx = mid + 1;
