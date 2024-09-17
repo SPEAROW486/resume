@@ -38,7 +38,7 @@ int main()
         std::cout << (dp[n][1] + dp[n][2] + dp[n][3]) % MOD << "\n";
     }
 
-    // int nn;
-    // std::cin >> nn;
+    int nn;
+    std::cin >> nn;
     return 0;
 }
